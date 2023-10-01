@@ -18,4 +18,26 @@ class Category extends Model
         self::$category->image = imageUpload($request->image,'category-images');
         self::$category->save();
     }
+
+    public static function updateCategory($request,$id){
+        self::$category = Category::find($id);
+        self::$category->name = $request->name;
+        self::$category->desc = $request->desc;
+        if($request->image){
+            if(file_exists(self::$category->image)){
+                unlink(self::$category->image);
+            }
+            self::$category->image = imageUpload($request->image,'category-images');
+        }
+        self::$category->save();
+    }
+
+    public static function deleteCategory($id)
+    {
+        self::$category = Category::find($id);
+        if(file_exists(self::$category->image)){
+            unlink(self::$category->image);
+        }
+        self::$category->delete();
+    }
 }

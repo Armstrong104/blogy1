@@ -20,6 +20,29 @@ class Blog extends Model
         self::$blog->save();
     }
 
+    public static function updateBlog($request,$id){
+        self::$blog = Blog::find($id);
+        self::$blog->category_id = $request->category_id;
+        self::$blog->title = $request->title;
+        self::$blog->desc = $request->desc;
+        if($request->image){
+            if(file_exists(self::$blog->image)){
+                unlink(self::$blog->image);
+            }
+            self::$blog->image = imageUpload($request->image,'blog-images');
+        }
+        self::$blog->save();
+    }
+
+    public static function deleteBlog($id)
+    {
+        self::$blog = Blog::find($id);
+        if(file_exists(self::$blog->image)){
+            unlink(self::$blog->image);
+        }
+        self::$blog->delete();
+    }
+
     public function category(){
         return $this->belongsTo(Category::class);
     }

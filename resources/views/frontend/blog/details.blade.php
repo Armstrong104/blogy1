@@ -9,7 +9,7 @@
                 <div class="card">
                     <img src="{{asset($blog->image)}}" class="card-img-top" alt="..." height="400" width="200">
                     <div class="card-body">
-                      <h5 class="card-title">{{$blog->category->name}}</h5>
+                      <h5 class="card-title">{{$blog->category?->name }}</h5>
                       <h3 class="card-title">{{$blog->title}}</h3>
                       <p class="card-text">{{$blog->desc}}</p>
                       <a href="{{route('blogs.show',$blog->id)}}" class="btn btn-primary">Go somewhere</a>

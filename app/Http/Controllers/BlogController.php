@@ -13,7 +13,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        $blogs = Blog::all();
+        return view('backend.blog.index',compact('blogs'));
     }
 
     /**
@@ -55,7 +56,9 @@ class BlogController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $blog = Blog::find($id);
+        $categories = Category::all();
+        return view('backend.blog.edit',compact('blog','categories'));
     }
 
     /**
@@ -63,7 +66,11 @@ class BlogController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        Blog::updateBlog($request,$id);
+
+        return to_route('blogs.index')->with('msg','Blog Updated Successfully!');
+
     }
 
     /**
@@ -71,6 +78,7 @@ class BlogController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Blog::deleteBlog($id);
+        return back()->with('msg','Blog Deleted Successfully!');
     }
 }

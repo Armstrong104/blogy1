@@ -155,7 +155,7 @@
                             <a href="single.html" class="img-link">
                                 <img src="{{ asset($blog->image) }}" alt="Image" class="img-fluid" >
                             </a>
-                            <h2><a href="single.html">{{ $blog->category->name }}</a></h2>
+                            <h2><a href="single.html">{{ $blog->category?->name }}</a></h2>
                             <h3><a href="single.html">{{ $blog->title }}</a></h3>
                             <p>{{ $blog->desc }}</p>
                             <p><a href="{{route('blogs.show',$blog->id)}}" class="read-more">Continue Reading</a></p>

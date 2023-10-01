@@ -12,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('backend.category.index',compact('categories'));
     }
 
     /**
@@ -50,7 +51,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::find($id);
+        return view('backend.category.edit',compact('category'));
     }
 
     /**
@@ -58,7 +60,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Category::updateCategory($request,$id);
+        return to_route('categories.index')->with('msg','Category Updated Successfully!');
     }
 
     /**
@@ -66,6 +69,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Category::deleteCategory($id);
+        return back()->with('msg','Category Deleted Successfully!');
     }
 }
